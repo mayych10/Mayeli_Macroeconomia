@@ -1,0 +1,95 @@
+Traceback (most recent call last):
+  File "C:\Users\Mayeli\anaconda3\lib\site-packages\jupyter_cache\executors\utils.py", line 51, in single_nb_execution
+    executenb(
+  File "C:\Users\Mayeli\anaconda3\lib\site-packages\nbclient\client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "C:\Users\Mayeli\anaconda3\lib\site-packages\nbclient\util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "C:\Users\Mayeli\anaconda3\lib\site-packages\nbclient\util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "C:\Users\Mayeli\anaconda3\lib\asyncio\base_events.py", line 647, in run_until_complete
+    return future.result()
+  File "C:\Users\Mayeli\anaconda3\lib\site-packages\nbclient\client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "C:\Users\Mayeli\anaconda3\lib\site-packages\nbclient\client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "C:\Users\Mayeli\anaconda3\lib\site-packages\nbclient\client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# Parametros con cambio en el Y
+r_size = 100
+
+k = 0.5
+j = 0.2                
+P  = 10 
+Y_1 = 25
+MS_0 = 500
+
+r = np.arange(r_size)
+
+# Necesitamos crear la funcion de demanda 
+
+def MD(k, j, P, r, Y):
+    MD_eq = (k*Y - j*r)
+    return MD_eq
+MD_1 = MD(k, j, P, r, Y_1)
+# Necesitamos crear la oferta de dinero.
+MS = MS_0 / P
+MS
+
+# Equilibrio en el mercado de dinero
+
+# Creamos el seteo para la figura 
+fig, ax1 = plt.subplots(figsize=(10, 8))
+
+# Agregamos titulo t el nombre de las coordenadas
+ax1.set(title="Efecto de una disminución en el ingreso en el Mercado de Dinero", xlabel=r'$M^s / P$', ylabel=r'r')
+
+# Ploteamos la demanda de dinero
+ax1.plot(MD_0, label= '$L_0$', color = '#CD5C5C')
+#ax1.plot(MD_1, label= '$L_0$', color = '#CD5C5C')
+
+
+# Para plotear la oferta de dinero solo necesitamos crear una linea vertical
+ax1.axvline(x = MS,  ymin= 0, ymax= 1, color = "grey")
+
+# Creamos las lineas puntadas para el equilibrio
+ax1.axhline(y=7.5, xmin= 0, xmax= 0.5, linestyle = ":", color = "black")
+
+# Agregamos texto
+ax1.text(0, 7.5, "$r_0$", fontsize = 12, color = 'black')
+ax1.text(50, 0, "$(M^s/P)_0$", fontsize = 12, color = 'black')
+ax1.text(50, 7.5, "$E_0$", fontsize = 12, color = 'black')
+
+# Nuevas curvas a partir del cambio en el nivel del producto
+ax1.plot(MD_1, label= '$L_1$', color = '#4287f5')
+ax1.axvline(x = MS,  ymin= 0, ymax= 1, color = "grey")
+ax1.axhline(y=2.5, xmin= 0, xmax= 0.5, linestyle = ":", color = "black")
+ax1.text(0, 2.2, "$r_1$", fontsize = 12, color = 'black')
+ax1.text(50, 2, "$E_1$", fontsize = 12, color = 'black')
+
+
+ax1.yaxis.set_major_locator(plt.NullLocator())   
+ax1.xaxis.set_major_locator(plt.NullLocator())
+
+ax1.legend()
+
+plt.show()
+------------------
+
+[1;31m---------------------------------------------------------------------------[0m
+[1;31mNameError[0m                                 Traceback (most recent call last)
+Input [1;32mIn [4][0m, in [0;36m<cell line: 31>[1;34m()[0m
+[0;32m     28[0m ax1[38;5;241m.[39mset(title[38;5;241m=[39m[38;5;124m"[39m[38;5;124mEfecto de una disminución en el ingreso en el Mercado de Dinero[39m[38;5;124m"[39m, xlabel[38;5;241m=[39m[38;5;124mr[39m[38;5;124m'[39m[38;5;124m$M^s / P$[39m[38;5;124m'[39m, ylabel[38;5;241m=[39m[38;5;124mr[39m[38;5;124m'[39m[38;5;124mr[39m[38;5;124m'[39m)
+[0;32m     30[0m [38;5;66;03m# Ploteamos la demanda de dinero[39;00m
+[1;32m---> 31[0m ax1[38;5;241m.[39mplot([43mMD_0[49m, label[38;5;241m=[39m [38;5;124m'[39m[38;5;124m$L_0$[39m[38;5;124m'[39m, color [38;5;241m=[39m [38;5;124m'[39m[38;5;124m#CD5C5C[39m[38;5;124m'[39m)
+[0;32m     32[0m [38;5;66;03m#ax1.plot(MD_1, label= '$L_0$', color = '#CD5C5C')[39;00m
+[0;32m     33[0m 
+[0;32m     34[0m 
+[0;32m     35[0m [38;5;66;03m# Para plotear la oferta de dinero solo necesitamos crear una linea vertical[39;00m
+[0;32m     36[0m ax1[38;5;241m.[39maxvline(x [38;5;241m=[39m MS,  ymin[38;5;241m=[39m [38;5;241m0[39m, ymax[38;5;241m=[39m [38;5;241m1[39m, color [38;5;241m=[39m [38;5;124m"[39m[38;5;124mgrey[39m[38;5;124m"[39m)
+
+[1;31mNameError[0m: name 'MD_0' is not defined
+NameError: name 'MD_0' is not defined
+
